@@ -35,4 +35,12 @@ export class FESTIVOService {
     return this.http.delete<FESTIVO>(`${this.url}Eliminar/${Id}`);
   }
 
+  public Buscar(Dato: string): Observable<FESTIVO> {
+    return this.http.get<FESTIVO>(`${this.url}Buscar/${Dato}`);
+  }
+  public Validar(Dia: number, Mes: number, Anio: number): Observable<FESTIVO> {
+    return this.http.get<FESTIVO>(`${this.url}Validar/${Dia}/${Mes}/${Anio}`);
+  }
+
+
 }
