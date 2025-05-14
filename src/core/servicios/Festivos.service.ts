@@ -31,8 +31,8 @@ export class FESTIVOService {
     return this.http.put<FESTIVO>(`${this.url}Actualizar`, FESTIVO);
   }
 
-  public Eliminar(Id: Number): Observable<FESTIVO> {
-    return this.http.delete<FESTIVO>(`${this.url}Eliminar/${Id}`);
+  public Eliminar(Id: Number): Observable<Boolean> {
+    return this.http.delete<Boolean>(`${this.url}Eliminar/${Id}`);
   }
 
   public Buscar(Dato: string): Observable<FESTIVO> {

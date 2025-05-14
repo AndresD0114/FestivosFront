@@ -31,8 +31,8 @@ export class TIPOService {
     return this.http.put<TIPO>(`${this.url}Actualizar`, TIPO);
   }
 
-  public Eliminar(Id: Number): Observable<TIPO> {
-    return this.http.delete<TIPO>(`${this.url}Eliminar/${Id}`);
+  public Eliminar(Id: Number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.url}Eliminar/${Id}`);
   }
 
   public Buscar(Dato: string): Observable<TIPO> {

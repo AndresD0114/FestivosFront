@@ -1,0 +1,24 @@
+<mat-toolbar>
+    <div class="barraTituloCRUD">
+        Tipos de festivos
+    </div>
+</mat-toolbar>
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Opción de Búsqueda</mat-label>
+        <mat-select [(value)]="opcionBusqueda">
+            <mat-option *ngFor="let opcion of opcionesBusqueda; let i = index" [value]="i">
+                {{opcion }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input matInput [(ngModel)]="textoBusqueda">
+    </mat-form-field>
+  
+</div>
+<div>
+    <ngx-datatable class="dark" [rows]="Tipos" [columns]="columnas" [limit]="TAMANO">
+    </ngx-datatable>
+</div>
