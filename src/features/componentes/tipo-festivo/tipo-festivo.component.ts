@@ -30,10 +30,9 @@ export class TipoFestivoComponent implements OnInit {
   public textoBusqueda: string = "";
 
   public Tipos: TIPO[] = [];
-  public columnas = [
-    { name: "tipo", prop: "nombre" }
-    
-  ];
+ public columnas = [
+  { name: "tipo", prop: "tipoFestivo" }
+];
   public modoColumna = ColumnMode;
   public tipoSeleccion = SelectionType;
   public TipoEscogido: TIPO | undefined;
@@ -50,10 +49,17 @@ export class TipoFestivoComponent implements OnInit {
   ngOnInit(): void {
     this.listar(-1);
   }
+  escoger(event: any) {
+    if (event.type == "click") {
+      this.TipoEscogido= event.row;
+      this.indiceTipoEscogido = this.Tipos.findIndex(TIPO => TIPO == this.TipoEscogido);
+    }
+  }
   public listar(idBuscado: number) {
     this.servicioTipo.ObtenerTodos().subscribe({
       next: response => {
         this.Tipos= response;
+        console.log(this.Tipos);
         if (idBuscado > 0) {
           this.indiceTipoEscogido = this.Tipos.findIndex(Tipo => Tipo.id == idBuscado);
           this.TipoEscogido = this.Tipos[this.indiceTipoEscogido];
@@ -68,4 +74,5 @@ export class TipoFestivoComponent implements OnInit {
       }
     });
   }
+  
 }
