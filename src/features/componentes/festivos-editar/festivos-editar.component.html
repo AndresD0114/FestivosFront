@@ -1,1 +1,46 @@
-<p>festivos-editar works!</p>
+<mat-toolbar>
+  <div class="barraTituloCRUD">
+    {{datos.encabezado}}
+  </div>
+</mat-toolbar>
+
+<div>
+  <!-- Campo nombre -->
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="datos.festivo.nombre">
+  </mat-form-field>
+
+  <!-- Campo día -->
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Día</mat-label>
+    <input matInput [(ngModel)]="datos.festivo.dia">
+  </mat-form-field>
+
+  <!-- Campo mes -->
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Mes</mat-label>
+    <input matInput [(ngModel)]="datos.festivo.mes">
+  </mat-form-field>
+
+  <!-- Campo días desde Pascua -->
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Días desde Pascua</mat-label>
+    <input matInput [(ngModel)]="datos.festivo.diasPascua">
+  </mat-form-field>
+
+  <!-- Campo tipoId -->
+  <mat-form-field appearance="fill" style="width:100%;">
+    <mat-label>Tipo festivo</mat-label>
+    <mat-select [(value)]="datos.festivo.tipoId">
+      <mat-option *ngFor="let tipo of datos.tipos" [value]="tipo.id">
+        {{ tipo.tipoFestivo }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" [mat-dialog-close]="datos">Aceptar</button>
+  <button mat-stroked-button color="primary" (click)="cerrar()">Cancelar</button>
+</div>
