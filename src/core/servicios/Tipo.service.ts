@@ -31,12 +31,12 @@ export class TIPOService {
     return this.http.put<TIPO>(`${this.url}Actualizar`, TIPO);
   }
 
-  public Eliminar(Id: Number): Observable<boolean> {
+  public Eliminar(Id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.url}Eliminar/${Id}`);
   }
 
-  public Buscar(Dato: string): Observable<TIPO> {
-    return this.http.get<TIPO>(`${this.url}Buscar/${Dato}`);
+  public Buscar(Tipo:number ,Dato: string): Observable<TIPO[]> {
+    return this.http.get<TIPO[]>(`${this.url}Buscar/${Tipo}/${Dato}`);
   }
   
 

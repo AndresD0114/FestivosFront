@@ -1,1 +1,17 @@
-<p>tipo-festivo-editar works!</p>
+<mat-toolbar>
+  <div class="barraTituloCRUD">
+    {{datos.encabezado}}
+  </div>
+</mat-toolbar>
+
+<div>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>nombre</mat-label>
+    <input matInput [(ngModel)]="datos.tipo.tipoFestivo">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-raised-button color="primary" [mat-dialog-close]="datos">Aceptar</button>
+    <button mat-stroked-button color="primary" (click)="cerrar()">Cancelar</button>
+    
+</div>

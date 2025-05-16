@@ -6,6 +6,9 @@ import { ColumnMode, DatatableComponent, NgxDatatableModule, SelectionType } fro
 import { TIPO } from '../../../shared/entidades/TIPO';
 import { TIPOService } from '../../../core/servicios/Tipo.service';
 import { MatDialog } from '@angular/material/dialog';
+import { TipoFestivoEditarComponent } from '../tipo-festivo-editar/tipo-festivo-editar.component';
+import { DecidirComponent } from '../../../shared/componentes/decidir/decidir.component';
+
 
 
 @Component({
@@ -74,5 +77,128 @@ export class TipoFestivoComponent implements OnInit {
       }
     });
   }
+  public modificar() {
+    if (this.TipoEscogido) {
+      const dialogo = this.servicioDialogo.open(TipoFestivoEditarComponent, {
+        width: "500px",
+        height: "300px",
+        data: {
+          encabezado: `Modicando el tipo ${this.TipoEscogido.tipoFestivo}`,
+          tipo: this.TipoEscogido
+        },
+        disableClose: true,
+      });
+      dialogo.afterClosed().subscribe({
+        next: datos => {
+          if (datos) {
+            this.servicioTipo.Actualizar(datos.tipo).subscribe({
+              next: response => {
+                this.Tipos[this.indiceTipoEscogido] = response;
+              },
+              error: error => {
+                window.alert(error.message);
+              }
+            });
+          }
+        },
+        error: error => {
+          window.alert(error.message);
+        }
+      });
+    }
+    else {
+      window.alert("Debe escoger el tipo a modificar");
+    }
+  }
+  public verificarEliminar() {
+    if (this.TipoEscogido) {
+      const dialogo = this.servicioDialogo.open(DecidirComponent, {
+        width: "300px",
+        height: "200px",
+        data: {
+          encabezado: `Está seguro de eliminar el tipo ${this.TipoEscogido.tipoFestivo} ?`,
+          id: this.TipoEscogido.id
+        },
+        disableClose: true,
+      });
+      dialogo.afterClosed().subscribe({
+        next: datos => {
+          if (datos) {
+            this.servicioTipo.Eliminar(datos.id).subscribe({
+              next: response => {
+                if (response) {
+                  this.listar(-1);
+                  window.alert("tipo eliminado con éxito");
+                } else {
+                  window.alert("No se pudo eliminar el tipo");
+                }
+              },
+              error: error => {
+                window.alert(error.message);
+              }
+            });
+          }
+        },
+        error: error => {
+          window.alert(error.message);
+        }
+      });
+    }
+    else {
+      window.alert("Debe escoger el tipo a eliminar");
+    }
+  }
+
+  public buscar() {
+    if (this.textoBusqueda.length > 0) {
+      this.servicioTipo.Buscar(this.opcionBusqueda, this.textoBusqueda).subscribe(
+        {
+          next: response => {
+            this.Tipos = response;
+          },
+          error: error => {
+            window.alert(error.message);
+          }
+        }
+      );
+    }
+    else {
+      this.listar(-1);
+    }
+  }
+ public agregar() {
+    const dialogo = this.servicioDialogo.open(TipoFestivoEditarComponent, {
+      width: "500px",
+      height: "300px",
+      data: {
+        encabezado: "Agregando un nuevo tipo",
+        tipo: {
+          id: 0,
+          tipoFestivo: "",
+        }
+      },
+      disableClose: true,
+    });
+    dialogo.afterClosed().subscribe({
+      next: datos => {
+        if (datos) {
+          this.servicioTipo.Agregar(datos.tipo).subscribe({
+            next: response => {
+              this.listar(response.id);
+            },
+            error: error => {
+              window.alert(error.message);
+            }
+          });
+        
+
+        }
+      },
+      error: error => {
+        window.alert(error.message);
+      }
+    });
+  }
+
   
 }
