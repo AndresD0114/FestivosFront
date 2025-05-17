@@ -11,6 +11,7 @@ import { NgFor } from '@angular/common';
 import { FestivosEditarComponent } from '../festivos-editar/festivos-editar.component';
 import {  FestivoEditarDTO } from '../../../shared/DTO/FestivosEditarDTO';
 import { DecidirComponent } from '../../../shared/componentes/decidir/decidir.component';
+import { T } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-festivos',
@@ -30,6 +31,8 @@ export class FestivosComponent implements OnInit {
   public opcionBusqueda: number = -1;
   public opcionesBusqueda: string[] = ["nombre","tipo"];
   public textoBusqueda: string = "";
+  public fechaavalidar: string = "";
+  public R: String="";
 
   public festivos: FESTIVO[] = [];
   public tipos: TIPO[] = [];
@@ -222,5 +225,21 @@ public agregar() {
   });
 }
 
+public validar() {
+  if (this.fechaavalidar.length > 0) {
+    this.servicioFestivo.Validar(this.fechaavalidar).subscribe({
+      next: response => {
+        this.R = response; // El backend retorna un string
+        window.alert(this.R);
+      },
+      error: error => {
+        this.R = error.error; // El backend retorna un string
+        window.alert(this.R);
+      }
+    });
+  } else {
+    window.alert("Debe ingresar una fecha");
+  }
+}
 
 }

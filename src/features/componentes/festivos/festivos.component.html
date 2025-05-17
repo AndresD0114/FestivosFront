@@ -19,6 +19,13 @@
     <button mat-stroked-button color="primary" (click)="buscar()">Buscar</button>
 </div>
 <div>
+    <mat-form-field appearance="fill">
+        <mat-label>validar fecha</mat-label>
+        <input matInput [(ngModel)]="fechaavalidar">
+    </mat-form-field>
+    <button mat-stroked-button color="primary" (click)="validar()">validar</button>
+</div>
+<div>
     <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
      <button mat-raised-button color="accent" (click)="modificar()">Modificar</button>
      <button mat-raised-button color="warn" (click)="verificarEliminar()">Eliminar</button>

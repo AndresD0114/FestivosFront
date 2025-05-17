@@ -41,9 +41,11 @@ export class FESTIVOService {
   public Buscar(Opcion: number,Dato: string): Observable<FESTIVO[]> {
     return this.http.get<FESTIVO[]>(`${this.url}Buscar/${Opcion}/${Dato}`);
   }
-  public Validar(Dia: number, Mes: number, Anio: number): Observable<FESTIVO> {
-    return this.http.get<FESTIVO>(`${this.url}Validar/${Dia}/${Mes}/${Anio}`);
-  }
-
-
+  public Validar(fecha: string): Observable<string> {
+  return this.http.get(`${this.url}Validar/${fecha}`, { responseType: 'text' });
 }
+}
+
+
+
+
