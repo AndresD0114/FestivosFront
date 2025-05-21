@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { FESTIVO } from '../../shared/entidades/FESTIVO';
 import { FestivoEditarDTO } from '../../shared/DTO/FestivosEditarDTO';
+import { FestivoDTO } from '../../shared/DTO/FestivoDTO.dto';
 
 
 @Injectable({
@@ -43,6 +44,9 @@ export class FESTIVOService {
   }
   public Validar(fecha: string): Observable<string> {
   return this.http.get(`${this.url}Validar/${fecha}`, { responseType: 'text' });
+}
+public ObtenerPorAnio(anio: number): Observable<FestivoDTO[]> {
+  return this.http.get<FestivoDTO[]>(`${this.url}listar/${anio}`);
 }
 }
 

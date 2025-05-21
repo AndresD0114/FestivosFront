@@ -1,0 +1,24 @@
+<mat-toolbar>
+    <div class="barraTituloCRUD">
+        Festivos por Año
+    </div>
+</mat-toolbar>
+
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Año</mat-label>
+        <input matInput type="number" [(ngModel)]="anioaencontrar" placeholder="Ingrese año">
+    </mat-form-field>
+    <button mat-stroked-button color="primary" (click)="buscarFestivos()">Buscar</button>
+</div>
+
+<div>
+    <ngx-datatable class="dark"
+        [rows]="festivos"
+        [columns]="columnas"
+        [limit]="TAMANO"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [columnMode]="modoColumna.force">
+    </ngx-datatable>
+</div>
