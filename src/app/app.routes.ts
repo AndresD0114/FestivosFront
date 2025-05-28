@@ -4,6 +4,7 @@ import { FestivosComponent } from '../features/componentes/festivos/festivos.com
 import { AnioComponent } from '../features/componentes/anio/anio.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'anio', pathMatch: 'full' },
     { path: "tipos", component:TipoFestivoComponent },
     {path: "festivos", component:FestivosComponent},
     {path: "anio", component:AnioComponent}
